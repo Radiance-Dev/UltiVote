@@ -1,0 +1,9 @@
+#IF YOU WANT TO TEST WITH THE TEST VOTE SITE
+#Enable offline rewards
+offlinerewards: true
+#NOT RECOMMENDED
+offlineoprewards: false
+
+# Extras fill NONE to disable
+sound: ''
+effect: ''

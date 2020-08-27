@@ -1,0 +1,4 @@
+name: UltiVote
+version: 1.0-BETA
+main: dev.radiance.ultivote.UltiVote
+prefix: UltiVote
