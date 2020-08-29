@@ -34,17 +34,14 @@ public class VoteListener implements Listener {
             return;
 
         if (player != null)  {
-            if(!config.getString("sound").equals("none"))
+            // TODO PLEASE MAKE COMMAND LIST
+            if(!config.getString("sound").equals("NONE"))
                 player.playSound(player.getLocation(), Sound.valueOf(config.getString("sound")), 5F, 1F);
-            if(!config.getString("effect").equals("none"))
+            if(!config.getString("effect").equals("NONE"))
                 player.playEffect(player.getLocation(), Effect.valueOf(config.getString("effect")), 1);
         } else {
-
-            if(!config.getString("offlinerewards").equals("true")) {
-                return;
-            } else {
+            if(!config.getString("offlinerewards").equals("false"))
                 perm.setPermission("ultivote.rewards", true);
-            }
         }
     }
 }

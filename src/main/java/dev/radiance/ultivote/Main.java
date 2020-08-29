@@ -1,11 +1,11 @@
 package dev.radiance.ultivote;
 
-import com.vexsoftware.votifier.model.Vote;
-import com.vexsoftware.votifier.model.VotifierEvent;
-import com.vexsoftware.votifier.util.standalone.VoteReceiver;
+import dev.radiance.ultivote.commands.Cmd;
+import dev.radiance.ultivote.commands.Vote;
 import dev.radiance.ultivote.configs.Config;
 import dev.radiance.ultivote.listeners.VoteListener;
 import org.bukkit.plugin.java.JavaPlugin;
+
 
 public final class Main extends JavaPlugin {
     @Override
@@ -14,6 +14,9 @@ public final class Main extends JavaPlugin {
         System.out.print("");
         setupListener();
         setupConfig();
+        getCommand("uv").setExecutor(new Cmd());
+        getCommand("ultivote").setExecutor(new Cmd());
+        getCommand("vote").setExecutor(new Vote());
     }
 
     @Override
@@ -32,6 +35,8 @@ public final class Main extends JavaPlugin {
         Config.get().addDefault("offlineoprewards", "false");
         Config.get().addDefault("sound", "BLOCK_ANVIL_LAND");
         Config.get().addDefault("effect", "SPELL");
+        Config.get().options().header();
+
         Config.get().options().copyDefaults(true);
         Config.save();
     }

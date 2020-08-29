@@ -1,4 +1,5 @@
 name: UltiVote
-version: 1.0-BETA
+version: 1.0-Alpha
 main: dev.radiance.ultivote.UltiVote
 prefix: UltiVote
+authors: [Radiance Development Team]
