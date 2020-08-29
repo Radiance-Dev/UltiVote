@@ -4,6 +4,6 @@ offlinerewards: true
 #NOT RECOMMENDED
 offlineoprewards: false
 
-# Extras fill NONE to disable
+# Extras, put NONE to disable
 sound: ''
 effect: ''

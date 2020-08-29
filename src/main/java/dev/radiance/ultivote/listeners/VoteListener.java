@@ -10,6 +10,9 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.permissions.PermissionAttachment;
+
+import java.util.HashMap;
 
 
 public class VoteListener implements Listener {
@@ -19,11 +22,13 @@ public class VoteListener implements Listener {
     }
     @EventHandler
     public void onVote(VotifierEvent event) {
+        HashMap<String,PermissionAttachment> attachments = new HashMap<String, PermissionAttachment>();
         Vote vote = event.getVote();
         String username = vote.getUsername();
         String serviceName = vote.getServiceName();
         FileConfiguration config = plugin.getConfig();
         Player player = Bukkit.getPlayerExact(username);
+        PermissionAttachment perm = player.addAttachment(plugin);
 
         if (username.length() < 1)
             return;
@@ -38,7 +43,7 @@ public class VoteListener implements Listener {
             if(!config.getString("offlinerewards").equals("true")) {
                 return;
             } else {
-
+                perm.setPermission("ultivote.rewards", true);
             }
         }
     }
