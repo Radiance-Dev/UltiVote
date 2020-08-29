@@ -1,5 +1,10 @@
 name: UltiVote
-version: 1.0-Alpha
+version: 1.1-Alpha
 main: dev.radiance.ultivote.UltiVote
 prefix: UltiVote
 authors: [Radiance Development Team]
+
+commands:
+  ultivote:
+    aliases: [uv]
+  vote:

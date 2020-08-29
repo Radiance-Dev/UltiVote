@@ -18,11 +18,19 @@ messages:
   - ''
 # Execute commands when player voted
 commands:
-  - 'broadcast &aThanks for voting'
+  - 'give {player} diamond 10'
   - ''
 # Extras, put NONE to disable
-sound: ''
+sound:
+  sound-effect: ''
+  volume: 5
+  pitch: 5
 effect: ''
+broadcast: ''
+
+
+# DO NOT CHANGE THIS
+config-version: 1
 
 # VISIT https://github.com/Radiance-Dev/UltiVote FOR MORE INFORMATION
 # VISIT OUR DISCORD! https://discord.io/radiance
