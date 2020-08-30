@@ -2,11 +2,9 @@ import org.apache.tools.ant.filters.ReplaceTokens
 
 apply plugin: 'java'
 
+def pluginName = 'UltiVote'
 group = 'dev.radiance'
 version = '1.1-Alpha'
-
-sourceCompatibility = '1.8'
-targetCompatibility = '1.8'
 
 repositories {
     mavenCentral()
@@ -24,6 +22,10 @@ dependencies {
 
     annotationProcessor 'org.projectlombok:lombok:1.18.12'
 
+}
+
+jar {
+    archiveFileName = pluginName + "-" + project.version + ".jar"
 }
 
 processResources {
