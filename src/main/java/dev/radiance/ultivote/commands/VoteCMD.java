@@ -1,21 +1,24 @@
 package dev.radiance.ultivote.commands;
 
-import org.bukkit.Bukkit;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
+import dev.radiance.ultivote.Main;
+import dev.radiance.ultivote.utils.BetterCommand;
+import dev.radiance.ultivote.utils.Utils;
+import lombok.RequiredArgsConstructor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 
-public class VoteCMD implements CommandExecutor {
+import java.util.List;
+
+@RequiredArgsConstructor
+public class VoteCMD extends BetterCommand {
+
+    private final Main plugin;
 
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        Player player = (Player) sender;
-        if (sender != null) {
-            player.sendMessage(Messages.voteMsg);
-        } else {
-            Bukkit.getLogger().info(Messages.voteMsg);
-        }
-        return false;
+    public void execute(CommandSender sender, String[] args) {
+        List<String> messages = plugin.getConfig().getStringList("messages.vote-list");
+        String fullMessages = Utils.colorize(String.join("\n", messages));
+
+        sender.sendMessage(fullMessages);
     }
+
 }

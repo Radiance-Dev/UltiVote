@@ -1,60 +1,56 @@
 package dev.radiance.ultivote.commands;
 
 import dev.radiance.ultivote.Main;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
+import dev.radiance.ultivote.utils.BetterCommand;
+import lombok.RequiredArgsConstructor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class UltiVoteCMD implements CommandExecutor {
+@RequiredArgsConstructor
+public class UltiVoteCMD extends BetterCommand {
 
     private final Main plugin;
 
-    public UltiVoteCMD(Main instance) {
-        plugin = instance;
-    }
-
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+    public void execute(CommandSender sender, String[] args) {
         if (!(sender instanceof Player)) {
             sender.sendMessage("You have to be a player to execute this command!");
-            return false;
+            return;
         }
 
         Player player = (Player) sender;
-
         if (!player.hasPermission("ulti.vote")) {
-            Messages.versionMsg(player);
-            return false;
+            this.execute(sender, new String[]{"version"});
+            return;
         }
 
         if (args.length < 1) {
-            Messages.helpMsg(player);
-            return false;
+            this.execute(sender, new String[]{"help"});
+            return;
         }
 
         switch (args[0].toLowerCase()) {
             case "reload":
             case "rl": {
                 plugin.reloadConfig();
-
-                Messages.reloadMsg(player);
+                player.sendMessage("§aConfig has been reloaded!");
                 break;
             }
 
             case "version":
             case "ver": {
-                Messages.versionMsg(player);
+                player.sendMessage("§aYou are using version" + plugin.getDescription().getVersion());
                 break;
             }
-
+            case "help": {
+                // todo: sends the help message
+                break;
+            }
             default: {
-                Messages.helpMsg(player);
+                this.execute(sender, new String[]{"help"});
                 break;
             }
-
         }
-
-        return false;
     }
+
 }

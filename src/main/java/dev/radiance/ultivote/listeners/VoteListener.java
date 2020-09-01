@@ -3,10 +3,12 @@ package dev.radiance.ultivote.listeners;
 import com.vexsoftware.votifier.model.Vote;
 import com.vexsoftware.votifier.model.VotifierEvent;
 import dev.radiance.ultivote.Main;
+import dev.radiance.ultivote.utils.Utils;
+import lombok.RequiredArgsConstructor;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Effect;
 import org.bukkit.Sound;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -15,19 +17,15 @@ import org.bukkit.permissions.PermissionAttachment;
 
 import java.util.List;
 
+@RequiredArgsConstructor
 public class VoteListener implements Listener {
 
     private final Main plugin;
-    private final FileConfiguration config;
-
-    public VoteListener(Main instance) {
-        plugin = instance;
-        config = plugin.getConfig();
-    }
 
     @SuppressWarnings("deprecation")
     @EventHandler
     public void onVote(VotifierEvent event) {
+        FileConfiguration config = plugin.getConfig();
         Vote vote = event.getVote();
 
         String username = vote.getUsername();
@@ -37,8 +35,8 @@ public class VoteListener implements Listener {
         if (username.length() < 1)
             return;
 
-        //todo: figure out how to attach permission to offlinePlayers
-
+        // todo: figure out how to attach permission to offlinePlayers
+        // fixme: this will fail btw
         if (player == null || !player.isOnline()) {
 
             if (config.getBoolean("offlinerewards")) {
@@ -50,26 +48,30 @@ public class VoteListener implements Listener {
             return;
         }
 
-        if (!config.getString("sound.sound-effect").equals("NONE"))
+        ConfigurationSection section = config.getConfigurationSection("on-player-vote");
+
+        String soundEffect = section.getString("sound.sound-effect");
+        if (!soundEffect.isEmpty() && !soundEffect.equals("NONE"))
             player.playSound(player.getLocation(),
-                    Sound.valueOf(config.getString("sound.sound-effect")),
-                    (float) config.get("sound.volume"),
-                    (float) config.get("sound.pitch"));
+                    Sound.valueOf(soundEffect),
+                    (float) section.get("sound.volume"),
+                    (float) section.get("sound.pitch")
+            );
 
-        if (!config.getString("effect").equals("NONE"))
-            player.playEffect(player.getLocation(), Effect.valueOf(config.getString("effect")), 1);
+        String effect = section.getString("effect");
+        if (!effect.isEmpty() && !effect.equals("NONE"))
+            player.playEffect(player.getLocation(), Effect.valueOf(effect), 1);
 
-        if (!config.getString("broadcast").equals("NONE"))
-            Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&',
-                    config.getString("broadcast")
-                            .replace("{player}", username)));
+        List<String> broadcastMessages = section.getStringList("broadcast");
+        if (!broadcastMessages.isEmpty()) {
+            String fullBroadcastMessage = Utils.colorize(String.join("\n", broadcastMessages));
+            Bukkit.broadcastMessage(fullBroadcastMessage);
+        }
 
-        if (!config.getStringList("commands").isEmpty()) {
-            List<String> commands = config.getStringList("commands");
-
-            for (String command : commands)
+        List<String> executableCommands = section.getStringList("commands");
+        if (!executableCommands.isEmpty()) {
+            for (String command : executableCommands)
                 Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command.replace("{player}", username));
-
         }
 
     }

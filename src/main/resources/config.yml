@@ -6,28 +6,42 @@
 #      \___/|_|\__|_|  \_/ \___/ \__\___|    #
 #                                            #
 #--------------------------------------------#
-#Enable offline rewards
-offlinerewards: true
-#NOT RECOMMENDED
-offlineoprewards: false
-# Messages when played executed command /vote
-messages:
-  - ''
-  - ''
-  - ''
-  - ''
-# Execute commands when player voted
-commands:
-  - 'give {player} diamond 10'
-  - ''
-# Extras, put NONE to disable
-sound:
-  sound-effect: ''
-  volume: 5
-  pitch: 5
-effect: ''
-broadcast: ''
 
+# Enable offline rewards
+offlinerewards: true
+# NOT RECOMMENDED
+offlineoprewards: false
+
+# The available messages
+messages:
+  # Called when player executes '/vote' command
+  # todo: change this section name (i feel there's a better name)
+  vote-list:
+    - ''
+    - ''
+    - ''
+    - ''
+    - ''
+
+# Called when a player has voted for the server
+on-player-vote:
+  # Execute given commands
+  commands:
+    - 'give {player} diamond 10'
+    - ''
+  # The sound effects
+  #
+  # Extras, put NONE to disable
+  sound:
+    sound-effect: ''
+    volume: 5
+    pitch: 5
+
+  # the effects that should be played
+  effect: ''
+  # the broadcast message
+  broadcast:
+    - ''
 
 # DO NOT CHANGE THIS
 config-version: 1

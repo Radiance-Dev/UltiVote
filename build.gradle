@@ -1,12 +1,15 @@
 import org.apache.tools.ant.filters.ReplaceTokens
 
-apply plugin: 'java'
+plugins {
+    id 'java'
+}
 
 def pluginName = 'UltiVote'
 group = 'dev.radiance'
 version = '1.1-Alpha'
 
 repositories {
+    mavenLocal()
     mavenCentral()
     maven { url = 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/' }
     maven { url = 'https://oss.sonatype.org/content/groups/public/' }
@@ -21,7 +24,12 @@ dependencies {
     compileOnly 'me.clip:placeholderapi:2.10.9'
 
     annotationProcessor 'org.projectlombok:lombok:1.18.12'
+}
 
+compileJava {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+    options.encoding = 'UTF-8'
 }
 
 jar {
