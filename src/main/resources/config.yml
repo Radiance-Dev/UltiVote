@@ -16,7 +16,7 @@ offlineoprewards: false
 messages:
   # Called when player executes '/vote' command
   # todo: change this section name (i feel there's a better name)
-  vote-list:
+  vote-message:
     - ''
     - ''
     - ''

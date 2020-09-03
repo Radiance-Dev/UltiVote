@@ -22,6 +22,10 @@ public class VoteListener implements Listener {
 
     private final Main plugin;
 
+    public VoteListener(Main plugin) {
+        this.plugin = plugin;
+    }
+
     @SuppressWarnings("deprecation")
     @EventHandler
     public void onVote(VotifierEvent event) {
@@ -38,13 +42,10 @@ public class VoteListener implements Listener {
         // todo: figure out how to attach permission to offlinePlayers
         // fixme: this will fail btw
         if (player == null || !player.isOnline()) {
-
             if (config.getBoolean("offlinerewards")) {
                 PermissionAttachment perm = player.addAttachment(plugin);
-
                 perm.setPermission("ultivote.rewards", true);
             }
-
             return;
         }
 
@@ -65,7 +66,12 @@ public class VoteListener implements Listener {
         List<String> broadcastMessages = section.getStringList("broadcast");
         if (!broadcastMessages.isEmpty()) {
             String fullBroadcastMessage = Utils.colorize(String.join("\n", broadcastMessages));
-            Bukkit.broadcastMessage(fullBroadcastMessage);
+            if(broadcastMessages.contains("{service}")) {
+                for(String services : broadcastMessages)
+                    Bukkit.broadcastMessage(Utils.colorize(String.join("\n", broadcastMessages.toString(), services.replace("{service}", serviceName))));
+            } else {
+                Bukkit.broadcastMessage(fullBroadcastMessage);
+            }
         }
 
         List<String> executableCommands = section.getStringList("commands");

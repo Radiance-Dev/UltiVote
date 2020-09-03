@@ -11,6 +11,9 @@ public class UltiVoteCMD extends BetterCommand {
 
     private final Main plugin;
 
+    public UltiVoteCMD(Main plugin) {
+        this.plugin = plugin;
+    }
     @Override
     public void execute(CommandSender sender, String[] args) {
         if (!(sender instanceof Player)) {

@@ -13,6 +13,10 @@ public class VoteCMD extends BetterCommand {
 
     private final Main plugin;
 
+    public VoteCMD(Main plugin) {
+        this.plugin = plugin;
+    }
+
     @Override
     public void execute(CommandSender sender, String[] args) {
         List<String> messages = plugin.getConfig().getStringList("messages.vote-list");
