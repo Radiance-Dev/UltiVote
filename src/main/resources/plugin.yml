@@ -1,8 +1,8 @@
 name: UltiVote
 version: 1.1-Alpha
-main: dev.radiance.ultivote.UltiVote
+main: com.raznar.ultivote.Main
 prefix: UltiVote
-authors: [Radiance Development Team]
+authors: [Raznar Lab Team]
 
 commands:
   ultivote:

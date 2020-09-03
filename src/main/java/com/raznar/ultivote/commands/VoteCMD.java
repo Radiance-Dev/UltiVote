@@ -1,8 +1,8 @@
-package dev.radiance.ultivote.commands;
+package com.raznar.ultivote.commands;
 
-import dev.radiance.ultivote.Main;
-import dev.radiance.ultivote.utils.BetterCommand;
-import dev.radiance.ultivote.utils.Utils;
+import com.raznar.ultivote.utils.BetterCommand;
+import com.raznar.ultivote.utils.Utils;
+import com.raznar.ultivote.Main;
 import lombok.RequiredArgsConstructor;
 import org.bukkit.command.CommandSender;
 

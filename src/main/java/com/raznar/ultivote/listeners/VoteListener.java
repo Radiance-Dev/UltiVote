@@ -1,9 +1,9 @@
-package dev.radiance.ultivote.listeners;
+package com.raznar.ultivote.listeners;
 
+import com.raznar.ultivote.Main;
+import com.raznar.ultivote.utils.Utils;
 import com.vexsoftware.votifier.model.Vote;
 import com.vexsoftware.votifier.model.VotifierEvent;
-import dev.radiance.ultivote.Main;
-import dev.radiance.ultivote.utils.Utils;
 import lombok.RequiredArgsConstructor;
 import org.bukkit.Bukkit;
 import org.bukkit.Effect;

@@ -1,8 +1,8 @@
-package dev.radiance.ultivote;
+package com.raznar.ultivote;
 
-import dev.radiance.ultivote.commands.UltiVoteCMD;
-import dev.radiance.ultivote.commands.VoteCMD;
-import dev.radiance.ultivote.listeners.VoteListener;
+import com.raznar.ultivote.commands.UltiVoteCMD;
+import com.raznar.ultivote.commands.VoteCMD;
+import com.raznar.ultivote.listeners.VoteListener;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;

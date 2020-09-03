@@ -1,4 +1,4 @@
-package dev.radiance.ultivote.utils;
+package com.raznar.ultivote.utils;
 
 import org.bukkit.ChatColor;
 
