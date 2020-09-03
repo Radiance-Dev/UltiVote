@@ -5,7 +5,7 @@ plugins {
 }
 
 def pluginName = 'UltiVote'
-group = 'dev.radiance'
+group = 'com.raznar'
 version = '1.1-Alpha'
 
 repositories {
