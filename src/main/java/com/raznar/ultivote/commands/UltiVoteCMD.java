@@ -2,11 +2,9 @@ package com.raznar.ultivote.commands;
 
 import com.raznar.ultivote.utils.BetterCommand;
 import com.raznar.ultivote.Main;
-import lombok.RequiredArgsConstructor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-@RequiredArgsConstructor
 public class UltiVoteCMD extends BetterCommand {
 
     private final Main plugin;

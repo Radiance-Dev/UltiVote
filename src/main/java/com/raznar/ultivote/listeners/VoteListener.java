@@ -4,7 +4,6 @@ import com.raznar.ultivote.Main;
 import com.raznar.ultivote.utils.Utils;
 import com.vexsoftware.votifier.model.Vote;
 import com.vexsoftware.votifier.model.VotifierEvent;
-import lombok.RequiredArgsConstructor;
 import org.bukkit.Bukkit;
 import org.bukkit.Effect;
 import org.bukkit.Sound;
@@ -17,7 +16,6 @@ import org.bukkit.permissions.PermissionAttachment;
 
 import java.util.List;
 
-@RequiredArgsConstructor
 public class VoteListener implements Listener {
 
     private final Main plugin;
