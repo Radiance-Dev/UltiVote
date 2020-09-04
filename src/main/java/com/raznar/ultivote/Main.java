@@ -3,16 +3,19 @@ package com.raznar.ultivote;
 import com.raznar.ultivote.commands.UltiVoteCMD;
 import com.raznar.ultivote.commands.VoteCMD;
 import com.raznar.ultivote.listeners.VoteListener;
+import com.vexsoftware.votifier.model.Vote;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
+import java.util.HashMap;
 
 public final class Main extends JavaPlugin {
 
     @Getter private static Main instance;
     private final int latestConfigVersion = 1;
+    private HashMap<Vote, String> data = new HashMap<Vote, String>();
 
     @Override
     public void onEnable() {
@@ -27,7 +30,6 @@ public final class Main extends JavaPlugin {
     public void onDisable() {
         instance = null;
     }
-
     /**
      * setups the listeners
      */

@@ -45,8 +45,9 @@ on-player-vote:
 
 # DO NOT CHANGE THIS
 config-version: 1
+data: []
 
 # VISIT https://github.com/Radiance-Dev/UltiVote FOR MORE INFORMATION
 # VISIT OUR DISCORD! https://discord.io/radiance
 
-#Copyright (c) 2020 Radiance Development Team
+#Copyright (c) 2020 Raznar Lab
