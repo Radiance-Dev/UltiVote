@@ -20,10 +20,19 @@ public final class Main extends JavaPlugin {
     @Override
     public void onEnable() {
         instance = this;
-
+        getLogger().info("#--------------------------------------------#\n" +
+                "#      _   _ _ _   ___     __    _           #\n" +
+                "#     | | | | | |_(_) \\   / /__ | |_ ___     #\n" +
+                "#     | | | | | __| |\\ \\ / / _ \\| __/ _ \\    #\n" +
+                "#     | |_| | | |_| | \\ V / (_) | ||  __/    #\n" +
+                "#      \\___/|_|\\__|_|  \\_/ \\___/ \\__\\___|    #\n" +
+                "#                                            #\n" +
+                "#--------------------------------------------#");
+        getLogger().info("Loading....");
         this.setupListener();
         this.setupCommands();
         this.setupConfig();
+        getLogger().info("Successfully loaded!");
     }
 
     @Override

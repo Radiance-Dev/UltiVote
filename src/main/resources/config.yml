@@ -9,23 +9,35 @@
 
 # Enable offline rewards
 offlinerewards: true
-# NOT RECOMMENDED
-offlineoprewards: false
-
+# Enable VoteParty
+voteparty: true
 # The available messages
 messages:
   # Called when player executes '/vote' command
-  # todo: change this section name (i feel there's a better name)
   vote-message:
     - ''
     - ''
     - ''
     - ''
     - ''
-
+  # Called when the vote reached the goal vote party
+  party-message:
+    - ''
+party-vote:
+  goal: 50
+  items:
+    - ''
+  comands:
+    - ''
+  sound:
+    sound-effect: ''
+    volume: 5
+    pitch: 5
 # Called when a player has voted for the server
 on-player-vote:
   # Execute given commands
+  items:
+    - ''
   commands:
     - 'give {player} diamond 10'
     - ''
@@ -43,9 +55,9 @@ on-player-vote:
   broadcast:
     - ''
 
-# DO NOT CHANGE THIS
+# DO NOT CHANGE THIS SECTION
 config-version: 1
-data: []
+vote: 0
 
 # VISIT https://github.com/Radiance-Dev/UltiVote FOR MORE INFORMATION
 # VISIT OUR DISCORD! https://discord.io/radiance
