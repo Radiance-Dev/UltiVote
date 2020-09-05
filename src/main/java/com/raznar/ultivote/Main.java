@@ -29,17 +29,6 @@ public final class Main extends JavaPlugin {
     public static final Gson GSON = new GsonBuilder().create();
     public static final JsonParser PARSER = new JsonParser();
 
-    /**
-     * Stores all {@link Vote} data for those who didn't get their rewards yet
-     * Each data will be deleted if the rewards are given to the players accordingly
-     *
-     * NOTE: The reason I put it as a concurrent set is so we can support multi-data modifications
-     *       although it can be performed by using the synchronized block or duplicating data
-     *       I prefer the lazy way. ~Alviannn
-     *
-     * WARNING: Please don't use concurrent related codes unless it's needed.
-     */
-    @Getter private static final Set<Vote> lateRewards = ConcurrentHashMap.newKeySet();
     @Getter private static Main instance;
 
     private final int latestConfigVersion = 1;
@@ -47,6 +36,18 @@ public final class Main extends JavaPlugin {
     @Getter private int voteCount = 0;
     /** The file to store the late rewarded votes */
     private final File lateRewardsFile = new File(this.getDataFolder(), "late-rewards.json");
+
+    /**
+     * Stores all {@link Vote} data for those who didn't get their rewards yet
+     * Each data will be deleted if the rewards are given to the players accordingly
+     * <p>
+     * NOTE: The reason I put it as a concurrent set is so we can support multi-data modifications
+     * although it can be performed by using the synchronized block or duplicating data
+     * I prefer the lazy way. ~Alviannn
+     * <p>
+     * WARNING: Please don't use concurrent related codes unless it's needed.
+     */
+    @Getter private final Set<Vote> lateRewards = ConcurrentHashMap.newKeySet();
 
     @Override
     public void onEnable() {
