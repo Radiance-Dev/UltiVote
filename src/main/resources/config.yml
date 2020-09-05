@@ -7,51 +7,58 @@
 #                                            #
 #--------------------------------------------#
 
-# Enable offline rewards
-offlinerewards: true
-# Enable VoteParty
-voteparty: true
-# The available messages
+# Should the Vote Party feature be enabled?
+# To activate a vote party the vote goals must be achieved!
+vote-party: true
+
 messages:
-  # Called when player executes '/vote' command
+  # The messages sent when executing 'vote' command
   vote-message:
     - ''
     - ''
     - ''
     - ''
     - ''
-  # Called when the vote reached the goal vote party
+  # The messages sent once the Vote Party is activated
   party-message:
     - ''
+
 party-vote:
+  # The vote goals to activate the vote party
   goal: 50
+  # Items given during vote party
   items:
     - ''
-  comands:
-    - ''
-  sound:
-    sound-effect: ''
-    volume: 5
-    pitch: 5
-# Called when a player has voted for the server
-on-player-vote:
-  # Execute given commands
-  items:
-    - ''
+  # Commands executed during vote party
   commands:
-    - 'give {player} diamond 10'
     - ''
-  # The sound effects
-  #
-  # Extras, put NONE to disable
+  # Sounds played during vote party
   sound:
     sound-effect: ''
     volume: 5
     pitch: 5
 
-  # the effects that should be played
+# Called when a player has voted for the server
+on-player-vote:
+  # Items given to the player
+  items:
+    - ''
+  # Commands executed to the player
+  commands:
+    - 'give {player} diamond 10'
+    - ''
+  # Sounds played for the player
+  #
+  # NOTE: put NONE to disable
+  sound:
+    sound-effect: ''
+    volume: 5
+    pitch: 5
+  # Effects shown to the player
+  #
+  # NOTE: put NONE to disable
   effect: ''
-  # the broadcast message
+  # The broadcast message
   broadcast:
     - ''
 

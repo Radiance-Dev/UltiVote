@@ -3,17 +3,16 @@ package com.raznar.ultivote.commands;
 import com.raznar.ultivote.utils.BetterCommand;
 import com.raznar.ultivote.Main;
 import com.raznar.ultivote.utils.Utils;
+import lombok.RequiredArgsConstructor;
 import org.bukkit.Sound;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+@RequiredArgsConstructor
 public class UltiVoteCMD extends BetterCommand {
 
     private final Main plugin;
 
-    public UltiVoteCMD(Main plugin) {
-        this.plugin = plugin;
-    }
     @Override
     public void execute(CommandSender sender, String[] args) {
         if (!(sender instanceof Player)) {
@@ -56,6 +55,7 @@ public class UltiVoteCMD extends BetterCommand {
                 player.sendMessage(Utils.colorize("&a/uv rewards - Opens a Gui for the vote rewards"));
                 player.sendMessage(Utils.colorize("&a/uv partyrewards - Opens a Gui for the party rewards"));
                 player.sendMessage(Utils.colorize("&a/uv version - Shows you the plugin version"));
+                player.sendMessage(" ");
                 player.sendMessage(Utils.colorize("&d[&b&m----------------------------&d]"));
                 player.sendMessage(Utils.colorize("&aCopyright (c) 2020 Raznar Lab"));
                 break;

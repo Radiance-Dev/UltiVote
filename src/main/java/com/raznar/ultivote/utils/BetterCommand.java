@@ -19,4 +19,5 @@ public abstract class BetterCommand implements CommandExecutor {
         this.execute(sender, args);
         return true;
     }
+
 }
