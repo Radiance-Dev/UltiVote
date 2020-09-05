@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class VoteListener implements Listener {
+    // It should be this right? (Im still learning hashmap)
     private HashMap<String, Player> data = new HashMap<String, Player>();
     private final Main plugin;
 
