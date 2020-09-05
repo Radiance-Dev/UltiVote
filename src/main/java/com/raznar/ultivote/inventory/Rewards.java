@@ -1,6 +1,5 @@
 package com.raznar.ultivote.inventory;
 
-import org.bukkit.inventory.Inventory;
 
 public class Rewards {
     /**
