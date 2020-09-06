@@ -7,10 +7,6 @@
 #                                            #
 #--------------------------------------------#
 
-# Should the Vote Party feature be enabled?
-# To activate a vote party the vote goals must be achieved!
-vote-party: true
-
 messages:
   # The messages sent when executing 'vote' command
   vote-message:
@@ -23,7 +19,10 @@ messages:
   party-message:
     - ''
 
-party-vote:
+vote-party:
+  # Should the Vote Party feature be enabled?
+  # To activate a vote party the vote goals must be achieved!
+  enabled: true
   # The vote goals to activate the vote party
   goal: 50
   # Items given during vote party

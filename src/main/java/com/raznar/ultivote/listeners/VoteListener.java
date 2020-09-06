@@ -20,9 +20,7 @@ public class VoteListener implements Listener {
         val vote = event.getVote();
         val username = vote.getUsername();
 
-        // apparently minecraft most valid username length is 3
-        // any lesser than that wouldn't be a valid username
-        if (username.length() < 3)
+        if (!Utils.isMinecraftName(username))
             return;
 
         val broadcastMessages = config.getStringList("on-player-vote.broadcast");

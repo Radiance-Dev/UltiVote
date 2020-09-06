@@ -39,13 +39,11 @@ public final class Main extends JavaPlugin {
 
     /**
      * Stores all {@link Vote} data for those who didn't get their rewards yet
-     * Each data will be deleted if the rewards are given to the players accordingly
+     * Each data will be deleted if the rewards are given to the players
      * <p>
-     * NOTE: The reason I put it as a concurrent set is so we can support multi-data modifications
-     * although it can be performed by using the synchronized block or duplicating data
-     * I prefer the lazy way. ~Alviannn
-     * <p>
-     * WARNING: Please don't use concurrent related codes unless it's needed.
+     * NOTE: The reason I put it as a concurrent set is so we can modify the field in another process at the same time
+     * although it can also be done by using the synchronized block or duplicating data
+     * I still prefer the lazy way. ~Alviannn
      */
     @Getter private final Set<Vote> lateRewards = ConcurrentHashMap.newKeySet();
 
@@ -102,12 +100,22 @@ public final class Main extends JavaPlugin {
 
     /**
      * Handles increasing the vote count by also saving the value to the config.yml
+     * This method also handles the vote party checker
      *
      * @return the {@link #voteCount} after getting incremented
      */
     @SuppressWarnings("UnusedReturnValue")
     public int increaseVoteCount() {
         voteCount++;
+
+        val section = this.getConfig().getConfigurationSection("vote-party");
+        val allowParty = section.getBoolean("enabled");
+        val partyGoals = section.getInt("goal");
+
+        if (partyGoals >= voteCount && allowParty) {
+            voteCount = 0;
+            // todo: starts the vote party
+        }
 
         this.getConfig().set("vote-count", voteCount);
         this.saveConfig();
