@@ -31,7 +31,6 @@ public final class Main extends JavaPlugin {
 
     @Getter private static Main instance;
 
-    private final int latestConfigVersion = 1;
     /** The vote count until it reaches the goal to activate the Vote Party */
     @Getter private int voteCount = 0;
     /** The file to store the late rewarded votes */
@@ -58,9 +57,8 @@ public final class Main extends JavaPlugin {
                 "#      \\___/|_|\\__|_|  \\_/ \\___/ \\__\\___|    #\n" +
                 "#                                            #\n" +
                 "#--------------------------------------------#");
-        this.getLogger().info("Loading....");
 
-        this.setupConfig();
+        this.saveDefaultConfig();
         this.readLateRewards();
 
         this.setupListener();
@@ -75,11 +73,7 @@ public final class Main extends JavaPlugin {
         Bukkit.getScheduler().runTaskTimer(this, () -> {
             this.saveLateRewards();
 
-            val duplicateList = new HashSet<>(lateRewards);
-            if (duplicateList.isEmpty())
-                return;
-
-            for (Vote vote : duplicateList) {
+            for (Vote vote : lateRewards) {
                 val receiver = Bukkit.getPlayerExact(vote.getUsername());
                 if (receiver == null)
                     continue;
@@ -87,7 +81,6 @@ public final class Main extends JavaPlugin {
                 this.giveVoteRewards(vote);
             }
         }, 20L, 200L);
-        this.getLogger().info("Successfully loaded!");
     }
 
     @Override
@@ -175,9 +168,9 @@ public final class Main extends JavaPlugin {
 
         try (Closer closer = new Closer()) {
             val reader = closer.add(new FileReader(lateRewardsFile));
+
             // grabs the all old vote data
             val list = PARSER.parse(reader).getAsJsonArray();
-
             for (val element : list) {
                 val data = element.getAsJsonObject();
                 val vote = GSON.fromJson(data, Vote.class);
@@ -191,11 +184,8 @@ public final class Main extends JavaPlugin {
 
     private void saveLateRewards() {
         try (Closer closer = new Closer()) {
-            val fileWriter = closer.add(new FileWriter(lateRewardsFile));
-            val writer = closer.add(new PrintWriter(fileWriter));
-
-            val jsonString = GSON.toJson(lateRewards);
-            writer.println(jsonString);
+            val writer = closer.add(new PrintWriter(lateRewardsFile));
+            writer.println(GSON.toJson(lateRewards));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -217,31 +207,6 @@ public final class Main extends JavaPlugin {
     private void setupCommands() {
         this.getCommand("ultivote").setExecutor(new UltiVoteCMD(this));
         this.getCommand("vote").setExecutor(new VoteCMD(this));
-    }
-
-    /**
-     * setups the config.yml
-     * this includes a config update checker
-     */
-    @SuppressWarnings("ResultOfMethodCallIgnored")
-    private void setupConfig() {
-        File folder = this.getDataFolder();
-
-        if (!folder.exists())
-            folder.mkdirs();
-
-        // gets config.yml from plugins/UltiVote
-        File configFile = new File(folder, "config.yml");
-
-        if (!configFile.exists())
-            this.saveDefaultConfig();
-
-        int currentConfigVersion = this.getConfig().getInt("config-version");
-
-        // if they're using an older config.yml, tell them that its outdated
-        // if they have the latest config or they're using a 'secret' code as their config-version, return
-        if (currentConfigVersion != latestConfigVersion && currentConfigVersion != 6969)
-            this.getLogger().severe("Config.yml is outdated. Please update your config.yml!");
     }
 
 }
